@@ -78,7 +78,7 @@ bookSchema.statics.saveBook = async function (bookData) {
 bookSchema.statics.updateBook = async function (bookId, updateBody) {
   const book = await this.findById(bookId);
   if (!book) {
-    throw new Error('Book not found');
+    throw new Error(`Book not found with id ${bookId}`);
   }
   Object.assign(book, updateBody);
   await book.save();
@@ -88,7 +88,7 @@ bookSchema.statics.updateBook = async function (bookId, updateBody) {
 bookSchema.statics.deleteBook = async function (bookId) {
   const book = await this.findById(bookId);
   if (!book) {
-    throw new Error('Book not found');
+    throw new Error(`Book not found with id ${bookId}`);
   }
   await book.deleteOne();
   return book;
