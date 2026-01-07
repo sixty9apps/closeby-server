@@ -8,7 +8,7 @@ const errorConverter = (err, req, res, next) => {
   let error = err;
   if (!(error instanceof ApiError)) {
     const statusCode =
-      error.statusCode || error instanceof mongoose.Error ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
+      error.statusCode || error instanceof mongoose.Error ? httpStatus.status.BAD_REQUEST : httpStatus.status.INTERNAL_SERVER_ERROR;
     const message = error.message || httpStatus[statusCode];
     error = new ApiError(statusCode, message, false, err.stack);
   }
@@ -17,19 +17,21 @@ const errorConverter = (err, req, res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
-  let { statusCode, message } = err;
-  if (!statusCode) {
-    statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+  let statusCode = err.statusCode == undefined ? httpStatus.status.INTERNAL_SERVER_ERROR : err.statusCode;
+  let message = err.message || 'Internal Server Error';
+
+  if (typeof statusCode !== 'number' || !statusCode) {
+    statusCode = httpStatus.status.INTERNAL_SERVER_ERROR;
   }
   if (config.env === 'production' && !err.isOperational) {
-    statusCode = httpStatus.INTERNAL_SERVER_ERROR;
-    message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
+    statusCode = httpStatus.status.INTERNAL_SERVER_ERROR;
+    message = httpStatus[httpStatus.status.INTERNAL_SERVER_ERROR];
   }
 
   res.locals.errorMessage = err.message;
 
   const response = {
-    code: statusCode,
+    code: statusCode == undefined ? httpStatus.status.INTERNAL_SERVER_ERROR : statusCode,
     message,
     ...(config.env === 'development' && { stack: err.stack }),
   };
@@ -38,7 +40,7 @@ const errorHandler = (err, req, res, next) => {
     logger.error(err);
   }
 
-  res.status(statusCode).send(response);
+  res.status(statusCode).json(response);
 };
 
 module.exports = {
