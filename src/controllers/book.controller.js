@@ -6,7 +6,7 @@ const { bookService } = require('../services');
 
 const createBook = catchAsync(async (req, res) => {
   const book = await bookService.createBook(req.body);
-  res.status(httpStatus.CREATED).send(book);
+  res.status(httpStatus.status.CREATED).send(book);
 });
 
 const getBooks = catchAsync(async (req, res) => {
@@ -19,7 +19,7 @@ const getBooks = catchAsync(async (req, res) => {
 const getBook = catchAsync(async (req, res) => {
   const book = await bookService.getBookById(req.params.bookId);
   if (!book) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
+    throw new ApiError(httpStatus.status.NOT_FOUND, 'Book not found');
   }
   res.send(book);
 });
@@ -44,7 +44,7 @@ const updateBook = catchAsync(async (req, res) => {
 
 const deleteBook = catchAsync(async (req, res) => {
   await bookService.deleteBookById(req.params.bookId);
-  res.status(httpStatus.NO_CONTENT).send();
+  res.status(httpStatus.status.NO_CONTENT).send();
 });
 
 module.exports = {
