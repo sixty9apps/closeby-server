@@ -3,6 +3,7 @@ Closeby
 
 ## Create book
 
+```
 curl --location 'localhost:3000/v1/book' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -26,10 +27,16 @@ curl --location 'localhost:3000/v1/book' \
         "adventure"
     ]
 }'
+```
+
+
 
 ## Get all books
+```
 curl --location 'localhost:3000/v1/book'
+```
 
 ## Get single book
+```
 curl --location 'localhost:3000/v1/book/:bookId'
-
+```
