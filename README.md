@@ -1,7 +1,7 @@
 # closeby-server
 Closeby
 
-<!-- Create book -->
+## Create book
 
 curl --location 'localhost:3000/v1/book' \
 --header 'Content-Type: application/json' \
@@ -27,9 +27,9 @@ curl --location 'localhost:3000/v1/book' \
     ]
 }'
 
-<!-- Get all books -->
+## Get all books
 curl --location 'localhost:3000/v1/book'
 
-<!-- Get single book -->
+## Get single book
 curl --location 'localhost:3000/v1/book/:bookId'
 
