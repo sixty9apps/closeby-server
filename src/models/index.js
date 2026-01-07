@@ -1,1 +1,1 @@
-module.exports.User = require('./book.model');
+module.exports.Book = require('./book.model');
