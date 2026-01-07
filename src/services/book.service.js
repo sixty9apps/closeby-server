@@ -9,7 +9,7 @@ const ApiError = require('../utils/ApiError');
  */
 const createBook = async (bookBody) => {
   if (await Book.isBookTitleTaken(bookBody.title)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Book title already exists');
+    throw new ApiError(httpStatus.status.BAD_REQUEST, 'Book title already exists');
   }
   return Book.saveBook(bookBody);
 };
@@ -65,10 +65,10 @@ const getBooksByAgeGroup = async (ageGroup, options) => {
 const updateBookById = async (bookId, updateBody) => {
   const book = await getBookById(bookId);
   if (!book) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
+    throw new ApiError(httpStatus.status.NOT_FOUND, 'Book not found');
   }
   if (updateBody.title && (await Book.isBookTitleTaken(updateBody.title, bookId))) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Book title already exists');
+    throw new ApiError(httpStatus.status.status.BAD_REQUEST, 'Book title already exists');
   }
   return Book.updateBook(bookId, updateBody);
 };
@@ -81,7 +81,7 @@ const updateBookById = async (bookId, updateBody) => {
 const deleteBookById = async (bookId) => {
   const book = await getBookById(bookId);
   if (!book) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
+    throw new ApiError(httpStatus.status.NOT_FOUND, 'Book not found');
   }
   return Book.deleteBook(bookId);
 };
