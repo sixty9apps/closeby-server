@@ -12,6 +12,7 @@
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "build": "echo 'Build step completed'",
     "test": "jest -i --colors --verbose --detectOpenHandles",
     "coverage": "jest -i --coverage",
     "coverage:coveralls": "jest -i --coverage --coverageReporters=text-lcov | coveralls",
@@ -32,6 +33,7 @@
     "mongoose": "^9.1.2",
     "passport": "^0.7.0",
     "pm2": "^6.0.14",
+    "serverless-http": "^4.0.0",
     "validator": "^13.0.0",
     "winston": "^3.2.1"
   },
