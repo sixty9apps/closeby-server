@@ -10,7 +10,9 @@
     "node": "24.12.0"
   },
   "scripts": {
-    "start": "pm2 start ecosystem.config.json --no-daemon",
+    "start": "node src/index.js",
+    "build": "echo 'Build completed'",
+    "vercel": "vercel --prod",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "jest -i --colors --verbose --detectOpenHandles",
     "coverage": "jest -i --coverage",
@@ -37,7 +39,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.7",
-    "eslint": "^9.39.2",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.18.2",
