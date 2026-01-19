@@ -14,7 +14,7 @@ curl --location 'localhost:3000/v1/book' \
     "audio_url": [
         "https://sample.info/?harmony=poison&toad=point#air"
     ],
-    "duration": "3h",
+    "duration": 3.5,
     "cover_image_url": "https://www.sample.org/art",
     "age_group": [
         0,
@@ -54,7 +54,7 @@ curl --location --request PATCH 'localhost:3000/v1/book/696d29228ed6a2d0d1f14b5c
     "audio_url": [
         "https://sample.info/?harmony=poison&toad=point#air"
     ],
-    "duration": "3h",
+    "duration": 3,
     "cover_image_url": "https://www.sample.org/art",
     "age_group": [
         0,
