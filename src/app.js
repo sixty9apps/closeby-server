@@ -32,7 +32,8 @@ app.use(compression());
 app.use(cors());
 
 // v1 api routes - with authentication
-app.use('/v1', auth, routes);
+// app.use('/v1', auth, routes); //Uncomment this line to enable authentication for all routes
+app.use('/v1', routes);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
