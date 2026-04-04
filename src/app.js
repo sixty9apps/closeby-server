@@ -7,6 +7,7 @@ const httpStatus = require('http-status');
 const config = require('./config/config');
 const { jwtStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
+const auth = require('./middlewares/auth');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
@@ -30,7 +31,8 @@ app.use(compression());
 // enable cors
 app.use(cors());
 
-// v1 api routes
+// v1 api routes - with authentication
+// app.use('/v1', auth, routes); //Uncomment this line to enable authentication
 app.use('/v1', routes);
 
 // send back a 404 error for any unknown api request

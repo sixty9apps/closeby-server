@@ -25,9 +25,8 @@ const bookSchema = mongoose.Schema(
       trim: true,
     },
     duration: {
-      type: String,
+      type: Number,
       required: true,
-      trim: true,
     },
     genre: {
       type: String,
