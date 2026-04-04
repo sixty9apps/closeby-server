@@ -48,6 +48,11 @@ const bookSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    author_id: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     isActive: {
       type: Boolean,
       default: true,

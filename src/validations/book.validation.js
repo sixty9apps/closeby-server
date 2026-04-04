@@ -12,6 +12,7 @@ const createBook = {
     age_group: Joi.array().items(Joi.number()).required(),
     highlights: Joi.array().items(Joi.string()).required(),
     cover_image_url: Joi.string().required(),
+    author_id: Joi.string(),
     isActive: Joi.boolean()
   }),
 };
@@ -21,6 +22,7 @@ const getBooks = {
     title: Joi.string(),
     genre: Joi.string(),
     age_group: Joi.array().items(Joi.number()),
+    author_id: Joi.string(),
     isActive: Joi.boolean(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
@@ -71,6 +73,7 @@ const updateBook = {
       age_group: Joi.array().items(Joi.number()),
       highlights: Joi.array().items(Joi.string()),
       cover_image_url: Joi.string(),
+      author_id: Joi.string(),
       isActive: Joi.boolean()
     })
     .min(1),
