@@ -43,14 +43,18 @@ const getAuthorBookById = async (id) => {
  * @returns {Promise<Array<{ author: AuthorBook, books: Array<Book> }>>}
  */
 const getAuthorsWithBooks = async () => {
-  const authors = await AuthorBook.find({ isActive: true }).lean();
+  // Do NOT use .lean() here. The toJSON schema plugin (renames _id → id,
+  // strips timestamps/__v) only runs during Mongoose's JSON serialization —
+  // and only on documents that still carry the model's toJSON method. iOS
+  // clients decode the response by the `id` key, not `_id`.
+  const authors = await AuthorBook.find({ isActive: true });
   if (authors.length === 0) return [];
 
   const authorIds = authors.map((a) => a._id.toString());
   const books = await Book.find({
     isActive: true,
     author_id: { $in: authorIds },
-  }).lean();
+  });
 
   const booksByAuthor = books.reduce((acc, book) => {
     (acc[book.author_id] = acc[book.author_id] || []).push(book);
