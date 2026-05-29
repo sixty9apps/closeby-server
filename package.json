@@ -14,6 +14,7 @@
     "build": "echo 'Build completed'",
     "vercel": "vercel --prod",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "seed:dr-eli": "node scripts/seed-author.js scripts/seed-dr-eli.json",
     "test": "jest -i --colors --verbose --detectOpenHandles",
     "coverage": "jest -i --coverage",
     "coverage:coveralls": "jest -i --coverage --coverageReporters=text-lcov | coveralls",
