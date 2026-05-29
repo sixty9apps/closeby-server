@@ -1,0 +1,63 @@
+{
+  "_note": "Sample seed data for Closeby 'Original Stories by author' feature. Author name and story content are placeholders — designed to be drop-in replaceable with real author content later. Placeholder URLs marked TODO: must be replaced with real Firebase Storage / CDN URLs before seeding.",
+
+  "author": {
+    "name": "Dr. Eli",
+    "bio": "Cozy, original bedtime tales written for short attention spans and big imaginations.",
+    "isActive": true
+  },
+
+  "books": [
+    {
+      "title": "Whisper the Sleepy Cloud",
+      "summary": "A little cloud who is afraid of falling asleep discovers the stars have been singing him lullabies all along.",
+      "content": "High above the rooftops lived a little cloud named Whisper. Every night, when the other clouds drifted off to sleep, Whisper would shiver. He was afraid of the dark. He was afraid of forgetting how to float.\n\nOne night, when the sky turned its softest velvet blue, Whisper heard something he had never heard before — a quiet, twinkling song. It came from the stars. They had been singing all along, but Whisper had been too busy worrying to listen.\n\n\"You don't have to stay awake to be safe,\" sang the brightest star. \"We will watch over you while you dream.\"\n\nWhisper closed his soft, puffy eyes. He felt the song wrap around him like a warm blanket. For the first time, he wasn't afraid.\n\nAnd somewhere far below, a child looking out their window thought they saw a cloud smile — just before it drifted off, peaceful and silver, into the gentlest sleep.\n\nGoodnight, Whisper. Goodnight, little cloud.",
+      "audio_url": [],
+      "duration": 95.0,
+      "genre": "bedtime",
+      "age_group": [3, 4, 5, 6],
+      "highlights": ["calming", "overcoming fear", "starlight", "sleep"],
+      "cover_image_url": "TODO_REPLACE_WITH_REAL_COVER_URL",
+      "isActive": true
+    },
+
+    {
+      "title": "The Moon's Pocket of Stars",
+      "summary": "Every night the Moon reaches into her pocket and sprinkles a tiny star above each sleeping child — one just for you.",
+      "content": "The Moon has a secret. In the soft folds of her silver cloak, she keeps a little pocket. And in that pocket, she keeps the tiniest stars in all the sky.\n\nEvery night, when the world grows quiet and the curtains stop swaying, the Moon walks her long, slow walk across the sky. She peeks into bedroom windows. She listens for the sound of small, sleeping breaths.\n\nThen, very gently, she reaches into her pocket. She takes out one tiny star — no bigger than a freckle — and tucks it just above each sleeping child.\n\nThat tiny star is yours. It will sit above you all night long, keeping your good dreams in and your worries out.\n\nYou won't see it when you wake up. The Moon will gather it back at sunrise and tuck it gently into her pocket again, ready for tomorrow night.\n\nBut tonight, your star is there. So you can close your eyes. The sky is watching. You are safe. You are loved.\n\nGoodnight.",
+      "audio_url": [],
+      "duration": 100.0,
+      "genre": "bedtime",
+      "age_group": [3, 4, 5, 6, 7],
+      "highlights": ["gentle", "wonder", "moonlight", "feeling safe"],
+      "cover_image_url": "TODO_REPLACE_WITH_REAL_COVER_URL",
+      "isActive": true
+    },
+
+    {
+      "title": "Bo the Brave Hedgehog",
+      "summary": "A small hedgehog discovers that being a little bit scared is fine — as long as you bring a friend along.",
+      "content": "Bo was a small hedgehog with a very big imagination. The trouble with a very big imagination is that it makes very big shadows.\n\nOne summer evening, Bo wanted to walk to the moonberry bush at the edge of the meadow. But the path was long. And the path had a wobbly bridge. And the path had a very dark spot under the old oak tree.\n\n\"I am too small to be brave,\" Bo whispered.\n\nHis friend Mira the fieldmouse was passing by. She heard him. \"Bo,\" she said, \"being brave doesn't mean you aren't scared. It means you go anyway, with someone who loves you.\"\n\nSo Mira tucked her paw into Bo's. Together, they crossed the wobbly bridge. Together, they walked under the dark oak tree. And together, they reached the moonberry bush, which glowed like a little lamp in the meadow.\n\nBo ate a single, silvery moonberry. It tasted like the bravest, sweetest thing he had ever known.\n\n\"I wasn't brave alone,\" Bo said. \"I was brave with you.\"\n\nAnd that, dear sleepy one, is the secret of being brave.",
+      "audio_url": [],
+      "duration": 110.0,
+      "genre": "friendship",
+      "age_group": [4, 5, 6, 7],
+      "highlights": ["courage", "friendship", "kindness", "summer night"],
+      "cover_image_url": "TODO_REPLACE_WITH_REAL_COVER_URL",
+      "isActive": true
+    },
+
+    {
+      "title": "The Garden That Hummed Goodnight",
+      "summary": "A curious girl learns that every plant in her grandmother's garden has its own special way of saying goodnight.",
+      "content": "Lila stayed at her grandmother's house in the summertime. Her favorite place was the garden behind the kitchen, where the air smelled like lemon balm and warm earth.\n\nOne night, Lila could not fall asleep. She tiptoed outside in her bare feet. The garden was very quiet — but not silent.\n\nThe tomato plants were humming low, like little brown bumblebees.\nThe lavender was sighing soft, soft, soft.\nThe rosemary was whispering an old song with no words.\nThe sunflowers, who were the tallest, were nodding their heavy heads — bowing goodnight to the moon.\n\n\"Are you all going to sleep?\" Lila whispered.\nA breeze stirred. The garden hummed a little louder, just for her.\n\nLila sat down between the rows of lemon balm. She closed her eyes. And one by one, each plant in the garden hummed her its own goodnight song.\n\nWhen her grandmother carried her back to bed, Lila was already deep, deep asleep. She was dreaming of green leaves and slow, gentle music.\n\nAnd the garden hummed her goodnight, all through the night.",
+      "audio_url": [],
+      "duration": 105.0,
+      "genre": "bedtime",
+      "age_group": [4, 5, 6, 7],
+      "highlights": ["nature", "grandparents", "quiet", "summer"],
+      "cover_image_url": "TODO_REPLACE_WITH_REAL_COVER_URL",
+      "isActive": true
+    }
+  ]
+}
