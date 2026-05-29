@@ -52,6 +52,15 @@ const bookSchema = mongoose.Schema(
       required: false,
       trim: true,
     },
+    // Lazy-cache of TTS audio keyed by narrator voice id. The client populates
+    // an entry the first time a user generates audio for (book, voice); all
+    // subsequent users get the cached Firebase URL instantly. See
+    // setNarratorAudio() below for the write side.
+    narrator_audio: {
+      type: Map,
+      of: String,
+      default: {},
+    },
     isActive: {
       type: Boolean,
       default: true,
@@ -111,6 +120,19 @@ bookSchema.statics.fetchBooksByGenre = async function (genre, options = {}) {
 bookSchema.statics.fetchBooksByAgeGroup = async function (ageGroup, options = {}) {
   const filter = { age_group: { $in: [ageGroup] }, isActive: true };
   return this.paginate(filter, options);
+};
+
+// Atomic "set if empty" for a single narrator entry. Two clients racing on the
+// same (book, voice) will both upload to Firebase, but only the first PATCH
+// wins; the second is a no-op so we never overwrite a good cached URL with a
+// stale one. Returns the post-update book.
+bookSchema.statics.setNarratorAudio = async function (bookId, voiceId, audioUrl) {
+  const field = `narrator_audio.${voiceId}`;
+  await this.updateOne(
+    { _id: bookId, [field]: { $in: [null, ''] } },
+    { $set: { [field]: audioUrl } }
+  );
+  return this.findById(bookId);
 };
 
 const Book = mongoose.model('Book', bookSchema);

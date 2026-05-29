@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { AuthorBook } = require('../models');
+const { AuthorBook, Book } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -36,8 +36,36 @@ const getAuthorBookById = async (id) => {
   return AuthorBook.fetchAuthorBookById(id);
 };
 
+/**
+ * Fetch every active author together with their active books, in a single
+ * round trip. Used by the iOS "Original Stories by author" Home section so the
+ * client doesn't need to N+1 across authors.
+ * @returns {Promise<Array<{ author: AuthorBook, books: Array<Book> }>>}
+ */
+const getAuthorsWithBooks = async () => {
+  const authors = await AuthorBook.find({ isActive: true }).lean();
+  if (authors.length === 0) return [];
+
+  const authorIds = authors.map((a) => a._id.toString());
+  const books = await Book.find({
+    isActive: true,
+    author_id: { $in: authorIds },
+  }).lean();
+
+  const booksByAuthor = books.reduce((acc, book) => {
+    (acc[book.author_id] = acc[book.author_id] || []).push(book);
+    return acc;
+  }, {});
+
+  return authors.map((author) => ({
+    author,
+    books: booksByAuthor[author._id.toString()] || [],
+  }));
+};
+
 module.exports = {
   createAuthorBook,
   queryAuthorBooks,
   getAuthorBookById,
+  getAuthorsWithBooks,
 };

@@ -15,7 +15,13 @@ const getAuthorBooks = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getAuthorsWithBooks = catchAsync(async (req, res) => {
+  const results = await authorBookService.getAuthorsWithBooks();
+  res.send({ results });
+});
+
 module.exports = {
   createAuthorBook,
   getAuthorBooks,
+  getAuthorsWithBooks,
 };

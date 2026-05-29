@@ -24,6 +24,7 @@ const getBooks = {
     age_group: Joi.array().items(Joi.number()),
     author_id: Joi.string(),
     isActive: Joi.boolean(),
+    include_authored: Joi.boolean(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -85,6 +86,16 @@ const deleteBook = {
   }),
 };
 
+const setNarratorAudio = {
+  params: Joi.object().keys({
+    bookId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    voice_id: Joi.string().required(),
+    audio_url: Joi.string().uri().required(),
+  }),
+};
+
 module.exports = {
   createBook,
   getBooks,
@@ -93,4 +104,5 @@ module.exports = {
   getBooksByAgeGroup,
   updateBook,
   deleteBook,
+  setNarratorAudio,
 };

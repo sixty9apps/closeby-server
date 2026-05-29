@@ -10,4 +10,8 @@ router
   .post(validate(authorBookValidation.createAuthorBook), authorBookController.createAuthorBook)
   .get(validate(authorBookValidation.getAuthorBooks), authorBookController.getAuthorBooks);
 
+router
+  .route('/with-books')
+  .get(authorBookController.getAuthorsWithBooks);
+
 module.exports = router;

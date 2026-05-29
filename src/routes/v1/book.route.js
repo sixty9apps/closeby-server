@@ -17,6 +17,10 @@ router
   .delete(validate(bookValidation.deleteBook), bookController.deleteBook);
 
 router
+  .route('/:bookId/narrator-audio')
+  .patch(validate(bookValidation.setNarratorAudio), bookController.setNarratorAudio);
+
+router
   .route('/genre/:genre')
   .get(validate(bookValidation.getBooksByGenre), bookController.getBooksByGenre);
 
