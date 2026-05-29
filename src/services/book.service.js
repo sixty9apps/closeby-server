@@ -86,6 +86,22 @@ const deleteBookById = async (bookId) => {
   return Book.deleteBook(bookId);
 };
 
+/**
+ * Cache a Firebase audio URL on a book for a given narrator voice.
+ * No-op if a URL is already set for that voice (first writer wins).
+ * @param {ObjectId} bookId
+ * @param {string} voiceId
+ * @param {string} audioUrl
+ * @returns {Promise<Book>}
+ */
+const setNarratorAudio = async (bookId, voiceId, audioUrl) => {
+  const book = await getBookById(bookId);
+  if (!book) {
+    throw new ApiError(httpStatus.status.NOT_FOUND, 'Book not found');
+  }
+  return Book.setNarratorAudio(bookId, voiceId, audioUrl);
+};
+
 module.exports = {
   createBook,
   queryBooks,
@@ -94,4 +110,5 @@ module.exports = {
   getBooksByAgeGroup,
   updateBookById,
   deleteBookById,
+  setNarratorAudio,
 };

@@ -10,10 +10,24 @@ const createBook = catchAsync(async (req, res) => {
 });
 
 const getBooks = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['title', 'genre', 'age_group', 'isActive']);
+  const filter = pick(req.query, ['title', 'genre', 'age_group', 'isActive', 'author_id']);
+  // Hide author-owned books from the default list so live 2.1 clients (which
+  // expect every returned book to have a populated audio_url) never see ones
+  // that ship with empty audio_url awaiting first-play TTS generation. New
+  // clients fetch them through /v1/author_book/with-books instead, or via
+  // ?include_authored=true here for debugging.
+  if (!req.query.include_authored && !filter.author_id) {
+    filter.author_id = { $in: [null, ''] };
+  }
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await bookService.queryBooks(filter, options);
   res.send(result);
+});
+
+const setNarratorAudio = catchAsync(async (req, res) => {
+  const { voice_id, audio_url } = req.body;
+  const book = await bookService.setNarratorAudio(req.params.bookId, voice_id, audio_url);
+  res.send(book);
 });
 
 const getBook = catchAsync(async (req, res) => {
@@ -55,4 +69,5 @@ module.exports = {
   getBooksByAgeGroup,
   updateBook,
   deleteBook,
+  setNarratorAudio,
 };
