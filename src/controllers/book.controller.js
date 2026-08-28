@@ -25,8 +25,8 @@ const getBooks = catchAsync(async (req, res) => {
 });
 
 const setNarratorAudio = catchAsync(async (req, res) => {
-  const { voice_id, audio_url } = req.body;
-  const book = await bookService.setNarratorAudio(req.params.bookId, voice_id, audio_url);
+  const { voice_id, audio_url, replaces } = req.body;
+  const book = await bookService.setNarratorAudio(req.params.bookId, voice_id, audio_url, replaces);
   res.send(book);
 });
 

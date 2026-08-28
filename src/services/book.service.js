@@ -88,18 +88,20 @@ const deleteBookById = async (bookId) => {
 
 /**
  * Cache a Firebase audio URL on a book for a given narrator voice.
- * No-op if a URL is already set for that voice (first writer wins).
+ * No-op if a URL is already set for that voice (first writer wins), unless
+ * `replaces` names the exact stale URL being healed.
  * @param {ObjectId} bookId
  * @param {string} voiceId
  * @param {string} audioUrl
+ * @param {string} [replaces] - stale URL the client proved unreachable
  * @returns {Promise<Book>}
  */
-const setNarratorAudio = async (bookId, voiceId, audioUrl) => {
+const setNarratorAudio = async (bookId, voiceId, audioUrl, replaces) => {
   const book = await getBookById(bookId);
   if (!book) {
     throw new ApiError(httpStatus.status.NOT_FOUND, 'Book not found');
   }
-  return Book.setNarratorAudio(bookId, voiceId, audioUrl);
+  return Book.setNarratorAudio(bookId, voiceId, audioUrl, replaces);
 };
 
 module.exports = {

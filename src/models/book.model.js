@@ -126,12 +126,21 @@ bookSchema.statics.fetchBooksByAgeGroup = async function (ageGroup, options = {}
 // same (book, voice) will both upload to Firebase, but only the first PATCH
 // wins; the second is a no-op so we never overwrite a good cached URL with a
 // stale one. Returns the post-update book.
-bookSchema.statics.setNarratorAudio = async function (bookId, voiceId, audioUrl) {
+//
+// `replaces` widens that by exactly one value: a client that has proven the
+// stored URL no longer resolves passes back the URL it saw, making the write a
+// compare-and-swap. Needed because Firebase mints a fresh download token on
+// every overwrite, so re-uploading the audio does not revive the dead URL —
+// the entry itself has to be rewritten. Scoping the overwrite to one known
+// value means a client cannot clobber an entry someone else has already
+// healed, nor replace an arbitrary working one.
+bookSchema.statics.setNarratorAudio = async function (bookId, voiceId, audioUrl, replaces) {
   const field = `narrator_audio.${voiceId}`;
-  await this.updateOne(
-    { _id: bookId, [field]: { $in: [null, ''] } },
-    { $set: { [field]: audioUrl } }
-  );
+  const writable = [{ [field]: { $in: [null, ''] } }];
+  if (replaces) {
+    writable.push({ [field]: replaces });
+  }
+  await this.updateOne({ _id: bookId, $or: writable }, { $set: { [field]: audioUrl } });
   return this.findById(bookId);
 };
 
