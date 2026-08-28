@@ -93,6 +93,8 @@ const setNarratorAudio = {
   body: Joi.object().keys({
     voice_id: Joi.string().required(),
     audio_url: Joi.string().uri().required(),
+    // Optional compare-and-swap target: the stale URL the client found dead.
+    replaces: Joi.string().uri(),
   }),
 };
 
